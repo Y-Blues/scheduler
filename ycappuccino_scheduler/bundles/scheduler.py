@@ -10,7 +10,10 @@ import logging
 from pelix.ipopo.decorators import ComponentFactory, Requires, Validate, Invalidate, Provides, Instantiate
 import hashlib
 
-
+"""
+component that implement a scheduler of task
+TODO Implem
+"""
 _logger = logging.getLogger(__name__)
 
 

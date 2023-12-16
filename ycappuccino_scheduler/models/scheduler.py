@@ -2,6 +2,9 @@ from ycappuccino.core.models.decorators  import Item, Property, Empty
 from ycappuccino.storage.models.model import Model
 from ycappuccino.core.decorator_app import App
 
+"""
+    model that describe a scheduler
+"""
 @Empty()
 def empty():
     _empty = Scheduler()
