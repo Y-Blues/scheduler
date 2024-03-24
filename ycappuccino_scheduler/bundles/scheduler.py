@@ -1,11 +1,10 @@
 #app="all"
 import json
 
-from ycappuccino.core.api import IActivityLogger, IService, YCappuccino
-from ycappuccino.storage.api import IManager
-from ycappuccino.endpoints.api import IJwt
-from ycappuccino.core.decorator_app import App
-from ycappuccino.scheduler.api import IScheduler
+from ycappuccino_api.core.api import IActivityLogger, IService
+from ycappuccino_api.proxy.api import YCappuccinoRemote
+from ycappuccino_api.storage.api import IManager
+from ycappuccino_api.scheduler.api import IScheduler
 import logging
 from pelix.ipopo.decorators import ComponentFactory, Requires, Validate, Invalidate, Provides, Instantiate
 import hashlib
@@ -18,10 +17,10 @@ _logger = logging.getLogger(__name__)
 
 
 @ComponentFactory('SchedulerService-Factory')
-@Provides(specifications=[IService.name, YCappuccino.name,IScheduler.name])
-@Requires("_log", IActivityLogger.name, spec_filter="'(name=main)'")
-@Requires("_manager_task", IManager.name, spec_filter="'(item_id=task)'")
-@Requires("_jwt", IJwt.name)
+@Provides(specifications=[YCappuccinoRemote.__name__, IService.__name__,IScheduler.__name__])
+@Requires("_log", IActivityLogger.__name__, spec_filter="'(name=main)'")
+@Requires("_manager_task", IManager.__name__, spec_filter="'(item_id=task)'")
+@Requires("_jwt", IJwt.__name__)
 @Instantiate("SchedulerService")
 @App(name="ycappuccino.rest-app")
 class SchedulerService(IService):
