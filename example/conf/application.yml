@@ -1,0 +1,15 @@
+---
+models.app:
+  ycappuccino_scheduler: true
+  ycappuccino_service_comm_storage: true
+
+layers:
+  ycappuccino_scheduler:
+    active: true
+  ycappuccino_service_comm:
+    active: true
+    host: localhost
+    port: 0
+    scheme: http
+name: scheduler
+bundle_prefix: ycappuccino
