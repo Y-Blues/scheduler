@@ -1,9 +1,13 @@
-from ycappuccino.core.models.decorators  import Item, Property, Empty
-from ycappuccino.storage.models.model import Model
 from ycappuccino.core.decorator_app import App
+
+from ycappuccino.api.decorators import Item, ItemReference, Empty, Property, Reference
+from ycappuccino.api.models import Model
+
 """
     model that describe a task link to a scheduler
 """
+
+
 @Empty()
 def empty():
     _empty = Task()
@@ -11,8 +15,11 @@ def empty():
     _empty.name("test")
     return _empty
 
+
 @App(name="ycappuccino.scheduler")
-@Item(collection="tasks", name="task", plural="tasks",  secure_write=True, secure_read=True)
+@Item(
+    collection="tasks", name="task", plural="tasks", secure_write=True, secure_read=True
+)
 class Task(Model):
     def __init__(self, a_dict=None):
         super().__init__(a_dict)
@@ -26,4 +33,6 @@ class Task(Model):
     @Property(name="cron")
     def cron(self, a_value):
         self._cron = a_value
+
+
 empty()

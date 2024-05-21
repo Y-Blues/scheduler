@@ -1,10 +1,10 @@
 # app="all"
 import json
 
-from ycappuccino.api.core.api import IActivityLogger, IService
-from ycappuccino.api.proxy.api import YCappuccinoRemote
-from ycappuccino.api.storage.api import IManager
-from ycappuccino.api.scheduler.api import IScheduler
+from ycappuccino.api.core import IActivityLogger, IService
+from ycappuccino.api.proxy import YCappuccinoRemote
+from ycappuccino.api.storage import IManager
+from ycappuccino.api.scheduler import IScheduler
 import logging
 from pelix.ipopo.decorators import (
     ComponentFactory,
