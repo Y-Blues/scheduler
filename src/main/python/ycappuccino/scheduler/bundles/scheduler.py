@@ -2,6 +2,7 @@
 import json
 
 from ycappuccino.api.core import IActivityLogger, IService
+from ycappuccino.api.endpoints import IRightManager
 from ycappuccino.api.proxy import YCappuccinoRemote
 from ycappuccino.api.storage import IManager
 from ycappuccino.api.scheduler import IScheduler
@@ -29,7 +30,7 @@ _logger = logging.getLogger(__name__)
 )
 @Requires("_log", IActivityLogger.__name__, spec_filter="'(name=main)'")
 @Requires("_manager_task", IManager.__name__, spec_filter="'(item_id=task)'")
-@Requires("_jwt", IJwt.__name__)
+@Requires("_jwt", IRightManager.__name__)
 @Instantiate("SchedulerService")
 @App(name="ycappuccino.rest-app")
 class SchedulerService(IService):
