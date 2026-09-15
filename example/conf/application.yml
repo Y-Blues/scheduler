@@ -1,15 +1,13 @@
 ---
-models.app:
-  ycappuccino_scheduler: true
-  ycappuccino_service_comm_storage: true
-
+name: scheduler-demo
+bundle_prefix:
+  - ycappuccino.storage
+  - demo
+  - ycappuccino.endpoints_service
+  - ycappuccino.scheduler
 layers:
-  ycappuccino_scheduler:
+  ycappuccino_storage_memory:
     active: true
-  ycappuccino_service_comm:
-    active: true
-    host: localhost
-    port: 0
-    scheme: http
-name: scheduler
-bundle_prefix: ycappuccino
+config:
+  http_server:
+    active: false
