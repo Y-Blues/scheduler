@@ -44,7 +44,7 @@ def _first_of_next_month(moment: datetime) -> datetime:
     return moment.replace(month=moment.month + 1, day=1, hour=0, minute=0)
 
 
-def _parse(expression: str):
+def _parse(expression: str) -> tuple:
     fields = expression.split()
     if len(fields) != 5:
         raise ValueError(f"expected 5 fields (minute hour day month weekday), got {expression!r}")

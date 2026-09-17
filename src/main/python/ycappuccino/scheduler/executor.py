@@ -29,7 +29,7 @@ class ScheduleExecutor(YCappuccinoComponent):
         endpoint: IServiceEndpoint,
         logger: YCappuccinoType(IActivityLogger, "(name=main)"),
         poll_interval: float = 1.0,
-    ):
+    ) -> None:
         self._manager = manager
         self._endpoint = endpoint
         self._logger = logger
@@ -39,7 +39,7 @@ class ScheduleExecutor(YCappuccinoComponent):
         self._stop_event = threading.Event()
         self._thread: Optional[threading.Thread] = None
 
-    async def start(self):
+    async def start(self) -> None:
         models = await self._manager.get_many(_ITEM_ID, subject=None)
         now = datetime.now()
         for model in models:
@@ -53,20 +53,20 @@ class ScheduleExecutor(YCappuccinoComponent):
         self._thread = threading.Thread(target=self._loop, daemon=True)
         self._thread.start()
 
-    async def stop(self):
+    async def stop(self) -> None:
         self._stop_event.set()
         if self._thread is not None:
             self._thread.join(timeout=5)
             self._thread = None
 
-    def _loop(self):
+    def _loop(self) -> None:
         while not self._stop_event.is_set():
             now = datetime.now()
             if any(next_fire <= now for next_fire in self._next_fire.values()):
                 asyncio.run(self._fire_due_tasks(now))
             self._stop_event.wait(self._poll_interval)
 
-    async def _fire_due_tasks(self, now: datetime):
+    async def _fire_due_tasks(self, now: datetime) -> None:
         for task_id, next_fire in list(self._next_fire.items()):
             if next_fire > now:
                 continue

@@ -14,20 +14,20 @@ from ycappuccino.core.decorator_app import App
 )
 class ScheduledTask(Model):
 
-    def __init__(self, a_dict=None):
+    def __init__(self, a_dict: dict | None = None) -> None:
         super().__init__(a_dict)
         self._name = None
         self._cron = None
         self._service = None
 
     @Property(name="name")
-    def name(self, a_value):
+    def name(self, a_value: str) -> None:
         self._name = a_value
 
     @Property(name="cron")
-    def cron(self, a_value):
+    def cron(self, a_value: str) -> None:
         self._cron = a_value
 
     @Property(name="service")
-    def service(self, a_value):
+    def service(self, a_value: str) -> None:
         self._service = a_value
